@@ -1,0 +1,9 @@
+Failed login attempt for user: testuser from IP: 192.168.1.1
+Another test warning message
+Failed login attempt for user: testuser2 from IP: 127.0.0.1
+Failed login attempt for user: admin2 from IP: 127.0.0.1
+Failed login attempt for user: admin2 from IP: 127.0.0.1
+Failed login attempt | username=admin2 | ip=127.0.0.1
+Failed login attempt | username=admin2 | ip=127.0.0.1
+Failed login attempt | username=admin2 | ip=127.0.0.1
+Account locked | username=admin2 | ip=127.0.0.1
