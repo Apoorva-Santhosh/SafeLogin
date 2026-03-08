@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY (development only)
 SECRET_KEY = 'django-insecure-dev-key'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Applications
 INSTALLED_APPS = [
@@ -16,11 +16,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'auth_app',  # we will create this app properly next
+    'auth_app',
 ]
 
-# Middleware (security + sessions)
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -30,10 +29,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
 
-# URL configuration
+# URLs
 ROOT_URLCONF = 'safelogin.urls'
 
-# Templates (HTML rendering)
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -53,7 +52,7 @@ TEMPLATES = [
 # WSGI
 WSGI_APPLICATION = 'safelogin.wsgi.application'
 
-# Database (SQLite)
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -69,18 +68,38 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Language & time
+# International
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# Static
 STATIC_URL = 'static/'
 
-# Default primary key
+# Default PK
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# --- FORCE DEVELOPMENT SETTINGS ---
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# Custom user model
+AUTH_USER_MODEL = 'auth_app.User'
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "handlers": {
+        "security_file": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": str(BASE_DIR / "logs" / "security.log"),
+        },
+    },
+
+    "loggers": {
+        "auth_app": {
+            "handlers": ["security_file"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+    },
+}
